@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #f4f6f9;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-label: #334155;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-active: #1d4ed8;
+      --input-border: #cbd5e1;
+      --input-hover: #94a3b8;
+      --input-focus-ring: rgba(59, 130, 246, 0.2);
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-page);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(219, 234, 254, 0.6) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.5) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .brand-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    form {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--card-border);
+      padding: 28px 24px;
+    }
+
+    fieldset {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px 18px 18px;
+      background-color: #fafbfc;
+    }
+
+    legend {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--primary-hover);
+      padding: 0 10px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    fieldset > div {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-label);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      height: 42px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text-main);
+      background-color: #ffffff;
+      border: 1px solid var(--input-border);
+      border-radius: 6px;
+      padding: 0 12px;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+      outline: none;
+    }
+
+    input[type="text"]::placeholder,
+    input[type="password"]::placeholder {
+      color: #94a3b8;
+    }
+
+    input[type="text"]:hover,
+    input[type="password"]:hover {
+      border-color: var(--input-hover);
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--input-focus-ring);
+      background-color: #ffffff;
+    }
+
+    fieldset > div:last-child {
+      margin-bottom: 0;
+      margin-top: 20px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      height: 42px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+      background-color: var(--primary);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
+      transition: background-color 0.16s ease, transform 0.08s ease, box-shadow 0.16s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--primary-hover);
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.24);
+    }
+
+    button[type="submit"]:active {
+      background-color: var(--primary-active);
+      transform: translateY(1px);
+      box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
+    }
+
+    .form-footer-notes {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .form-footer-notes a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .form-footer-notes a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="brand-header">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">Client Portal</h1>
+      <p class="brand-subtitle">Please enter your credentials to access your dashboard</p>
+    </div>
+
+    <form action="/login" method="POST">
+      <fieldset>
+        <legend>Account Login</legend>
+        
+        <div>
+          <label for="loginUsername">Username:</label>
+          <input 
+            type="text" 
+            id="loginUsername" 
+            name="username" 
+            placeholder="Enter your username"
+            required 
+            autocomplete="username">
+        </div>
+        
+        <div>
+          <label for="loginPassword">Password:</label>
+          <input 
+            type="password" 
+            id="loginPassword" 
+            name="password" 
+            placeholder="••••••••"
+            required 
+            autocomplete="current-password">
+        </div>
+        
+        <div>
+          <!-- Changed type from "button" to "submit" -->
+          <button type="submit">Login</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="form-footer-notes">
+      Need assistance? <a href="#help">Contact Support</a>
+    </div>
+  </div>
+
+</body>
+</html>

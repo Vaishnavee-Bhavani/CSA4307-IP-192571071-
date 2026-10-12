@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERCORP GLOBAL 2000 - Welcome</title>
+    <style>
+      /* --- Retro 2000s Web Design System --- */
+      :root {
+        --win-bg: #008080; /* Classic Teal / XP Slate */
+        --win-silver: #ece9d8;
+        --win-card: #ffffff;
+        --win-blue: #003399;
+        --win-cyan: #00ffff;
+        --win-header-blue: linear-gradient(180deg, #0a246a 0%, #a6caf0 100%);
+        --btn-bevel-light: #ffffff;
+        --btn-bevel-shadow: #7f7f7f;
+        --btn-bevel-dark: #404040;
+        --link-blue: #0000ee;
+        --link-hover: #ff0000;
+        --link-visited: #551a8b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Tahoma", "Verdana", "Arial", sans-serif;
+        font-size: 11px;
+        color: #000000;
+        background-color: var(--win-bg);
+        background-image: 
+          radial-gradient(#005c5c 15%, transparent 16%), 
+          radial-gradient(#004c4c 15%, transparent 16%);
+        background-size: 16px 16px;
+        background-position: 0 0, 8px 8px;
+        padding: 12px 8px 30px 8px;
+        line-height: 1.4;
+      }
+
+      a {
+        color: var(--link-blue);
+        text-decoration: underline;
+      }
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+      a:visited {
+        color: var(--link-visited);
+      }
+
+      /* Desktop Window Container (1024x768 optimal feel) */
+      .browser-wrapper {
+        max-width: 890px;
+        margin: 0 auto;
+        background-color: var(--win-silver);
+        border: 3px outset #ffffff;
+        box-shadow: 4px 6px 16px rgba(0, 0, 0, 0.45);
+      }
+
+      /* Windows XP / 2000 style Window Title Bar */
+      .win-titlebar {
+        background: linear-gradient(90deg, #0055ea 0%, #0866ff 40%, #6199ff 80%, #3a75e8 100%);
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 4px 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-shadow: 1px 1px 1px #002277;
+        border-bottom: 2px solid #002c80;
+      }
+
+      .win-titlebar .controls {
+        display: flex;
+        gap: 3px;
+      }
+
+      .win-btn {
+        width: 17px;
+        height: 15px;
+        background: #ece9d8;
+        border: 1px outset #fff;
+        font-size: 9px;
+        font-weight: bold;
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: default;
+        line-height: 1;
+      }
+      .win-btn.close {
+        background: #d84937;
+        color: #fff;
+      }
+
+      /* Classic Web Header Banner */
+      header {
+        background: linear-gradient(180deg, #001f5c 0%, #0044aa 45%, #00113a 100%);
+        padding: 14px 16px 10px 16px;
+        border-bottom: 2px ridge #ffffff;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 2px, transparent 2px, transparent 4px);
+        pointer-events: none;
+      }
+
+      .logo-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .logo-title {
+        font-family: "Trebuchet MS", "Impact", sans-serif;
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: #ffe600;
+        text-shadow: 2px 2px 0px #ff0000, 4px 4px 0px #000000;
+        text-transform: uppercase;
+      }
+
+      .logo-tagline {
+        font-size: 11px;
+        color: #66ffff;
+        font-style: italic;
+        margin-top: -2px;
+        text-shadow: 1px 1px 2px #000;
+      }
+
+      .meta-specs {
+        font-size: 10px;
+        color: #d1e0ff;
+        text-align: right;
+        font-family: "Courier New", monospace;
+      }
+
+      /* Classic CSS Marquee Ticker */
+      .marquee-container {
+        background: #000000;
+        border-top: 1px solid #7f7f7f;
+        border-bottom: 1px solid #7f7f7f;
+        color: #00ff66;
+        font-family: "Courier New", monospace;
+        font-weight: bold;
+        font-size: 11px;
+        padding: 3px 0;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .marquee-content {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee-roll 22s linear infinite;
+      }
+
+      @keyframes marquee-roll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+      }
+
+      /* 2000s Beveled Navigation Bar */
+      nav.nav-bar {
+        background: #d4d0c8;
+        padding: 4px 8px;
+        border-bottom: 2px groove #ffffff;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .nav-tab {
+        background: linear-gradient(180deg, #ffffff 0%, #ece9d8 40%, #c8c5b5 100%);
+        border: 2px outset #ffffff;
+        padding: 4px 10px;
+        text-decoration: none;
+        color: #000000;
+        font-weight: bold;
+        font-size: 11px;
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .nav-tab:hover {
+        background: linear-gradient(180deg, #ffffe0 0%, #ffe499 50%, #f0c345 100%);
+        color: #000080;
+        text-decoration: none;
+      }
+
+      .nav-tab.active {
+        background: #ffffff;
+        border: 2px inset #ffffff;
+        color: #003399;
+      }
+
+      /* 2-Column Classic Layout */
+      .page-body {
+        display: flex;
+        background: #ffffff;
+        min-height: 480px;
+      }
+
+      @media (max-width: 680px) {
+        .page-body {
+          flex-direction: column;
+        }
+      }
+
+      /* Left Sidebar */
+      aside.sidebar {
+        width: 220px;
+        background: #ece9d8;
+        border-right: 2px groove #ffffff;
+        padding: 10px 8px;
+        flex-shrink: 0;
+      }
+
+      .widget-box {
+        border: 2px groove #ffffff;
+        background: #ffffff;
+        margin-bottom: 12px;
+        padding: 0;
+      }
+
+      .widget-title {
+        background: linear-gradient(90deg, #103884 0%, #3074d6 100%);
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 3px 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .widget-content {
+        padding: 6px 8px;
+        font-size: 11px;
+      }
+
+      .widget-content ul {
+        list-style: square;
+        padding-left: 16px;
+        margin: 4px 0;
+      }
+
+      .widget-content li {
+        margin-bottom: 4px;
+      }
+
+      /* Construction Alert Ribbon */
+      .under-construction {
+        background: repeating-linear-gradient(-45deg, #ffd700, #ffd700 10px, #000000 10px, #000000 20px);
+        padding: 4px;
+        text-align: center;
+        margin-bottom: 10px;
+        border: 1px solid #000;
+      }
+
+      .construction-inner {
+        background: #ffffff;
+        font-size: 10px;
+        font-weight: bold;
+        color: #cc0000;
+        padding: 4px;
+        text-transform: uppercase;
+      }
+
+      /* Main Content Area */
+      main {
+        flex: 1;
+        padding: 14px 18px;
+        background: #ffffff;
+        background-image: linear-gradient(#f7f9fa 1px, transparent 1px);
+        background-size: 100% 20px;
+      }
+
+      .welcome-banner {
+        border: 2px inset #d4d0c8;
+        background: #fdfcee;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+      }
+
+      h1.main-title {
+        font-size: 18px;
+        color: #990000;
+        font-family: "Trebuchet MS", "Arial", sans-serif;
+        border-bottom: 2px solid #990000;
+        padding-bottom: 2px;
+        margin-bottom: 6px;
+      }
+
+      h2.section-title {
+        font-size: 13px;
+        color: #003399;
+        background: #e6eefc;
+        border-left: 5px solid #003399;
+        padding: 4px 6px;
+        margin: 12px 0 8px 0;
+      }
+
+      p.content-para {
+        margin-bottom: 10px;
+        line-height: 1.5;
+        text-align: justify;
+      }
+
+      /* Feature Table */
+      .specs-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11px;
+        margin: 10px 0;
+        border: 2px outset #ffffff;
+      }
+
+      .specs-table th {
+        background: #003366;
+        color: #ffffff;
+        text-align: left;
+        padding: 4px 6px;
+        border: 1px solid #ffffff;
+      }
+
+      .specs-table td {
+        padding: 4px 6px;
+        border: 1px solid #d4d0c8;
+        background: #ffffff;
+      }
+
+      .specs-table tr:nth-child(even) td {
+        background: #f4f6fa;
+      }
+
+      /* 2000s Button Action */
+      .action-btn {
+        background: linear-gradient(180deg, #e6f2ff 0%, #99ccff 50%, #3385ff 100%);
+        border: 2px outset #ffffff;
+        padding: 5px 16px;
+        font-weight: bold;
+        font-size: 11px;
+        color: #000055;
+        cursor: pointer;
+        display: inline-block;
+        margin: 6px 0;
+      }
+
+      .action-btn:active {
+        border-style: inset;
+        background: #3385ff;
+        color: #ffffff;
+      }
+
+      /* Retro Counter */
+      .visitor-counter {
+        display: inline-flex;
+        background: #000000;
+        border: 2px inset #999;
+        padding: 2px 4px;
+        gap: 2px;
+      }
+
+      .counter-digit {
+        background: #111;
+        color: #00ff33;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        font-weight: bold;
+        padding: 1px 3px;
+        border: 1px solid #333;
+      }
+
+      /* 88x31 Badges Row */
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 12px 0;
+      }
+
+      .retro-badge {
+        width: 88px;
+        height: 31px;
+        border: 1px solid #000;
+        box-shadow: 1px 1px 0px #fff inset;
+        display: flex;
+        font-size: 9px;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        line-height: 1;
+        cursor: default;
+        user-select: none;
+      }
+
+      .badge-left {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        padding: 1px;
+      }
+
+      .badge-right {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #000;
+        padding: 1px;
+      }
+
+      .badge-netscape .badge-left { background: #006666; }
+      .badge-netscape .badge-right { background: #ffcc00; color: #000; }
+
+      .badge-ie .badge-left { background: #003399; }
+      .badge-ie .badge-right { background: #ffff99; }
+
+      .badge-valid .badge-left { background: #cc0000; }
+      .badge-valid .badge-right { background: #ffffff; }
+
+      /* Retro Footer */
+      footer {
+        background: #d4d0c8;
+        border-top: 2px groove #ffffff;
+        padding: 10px 14px;
+        text-align: center;
+        font-size: 10px;
+        color: #444444;
+      }
+
+      .footer-links {
+        margin-bottom: 6px;
+      }
+
+      .footer-links a {
+        margin: 0 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="browser-wrapper">
+      
+      <!-- Windows Title Bar -->
+      <div class="win-titlebar">
+        <span>Microsoft Internet Explorer - [CYBERCORP GLOBAL 2000]</span>
+        <div class="controls">
+          <div class="win-btn">_</div>
+          <div class="win-btn">&#9633;</div>
+          <div class="win-btn close">&#10005;</div>
+        </div>
+      </div>
+
+      <!-- Header & Company Logo -->
+      <header>
+        <div class="logo-area">
+          <div>
+            <div class="logo-title">&#9733; CyberCorp 2000 &#9733;</div>
+            <div class="logo-tagline">"Synergizing the Global Information Superhighway"</div>
+          </div>
+          <div class="meta-specs">
+            [Best viewed in 1024x768 @ 16-Bit Color]<br>
+            Hosted on High-Speed T1 Line // Y2K Compliant
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrolling News Ticker -->
+      <div class="marquee-container">
+        <span class="marquee-content">
+          *** LATEST NEWSFLASH: CyberCorp 2000 acquires dot-com multimedia networks! *** E-commerce gateway v2.4 released *** Remember to sign our guestbook! ***
+        </span>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-bar">
+        <a href="#welcome" class="nav-tab active">&#127968; Home</a>
+        <a href="#about" class="nav-tab">&#128188; About Us</a>
+        <a href="#services" class="nav-tab">&#128187; Services</a>
+        <a href="#guestbook" class="nav-tab">&#128214; Guestbook</a>
+        <a href="#webring" class="nav-tab">&#127760; Webring</a>
+      </nav>
+
+      <!-- 2-Column Content Body -->
+      <div class="page-body">
+        
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+          
+          <!-- Under Construction Widget -->
+          <div class="under-construction">
+            <div class="construction-inner">
+              &#9888; Under Construction &#9888;
+            </div>
+          </div>
+
+          <!-- Quick Navigation -->
+          <div class="widget-box">
+            <div class="widget-title">Quick Portals</div>
+            <div class="widget-content">
+              <ul>
+                <li><a href="#about">Corporate History</a></li>
+                <li><a href="#solutions">CD-ROM Media</a></li>
+                <li><a href="#intranet">Intranet Dialup</a></li>
+                <li><a href="#download">Download Drivers</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visitor Counter -->
+          <div class="widget-box">
+            <div class="widget-title">Visitor Statistics</div>
+            <div class="widget-content" style="text-align: center;">
+              <p style="margin-bottom: 4px; font-size: 10px;">Hits since Nov 1999:</p>
+              <div class="visitor-counter">
+                <span class="counter-digit">0</span>
+                <span class="counter-digit">0</span>
+                <span class="counter-digit">4</span>
+                <span class="counter-digit">8</span>
+                <span class="counter-digit">2</span>
+                <span class="counter-digit">9</span>
+                <span class="counter-digit">1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Webmaster Contact -->
+          <div class="widget-box">
+            <div class="widget-title">Webmaster Desk</div>
+            <div class="widget-content">
+              <p>Questions, broken hyperlinks or midi file requests?</p>
+              <p style="margin-top: 4px;">
+                <a href="mailto:webmaster@cybercorp2000.net">&#9993; Send E-Mail</a>
+              </p>
+            </div>
+          </div>
+        </aside>
+
+        <main>
+          
+          <!-- Welcome Section -->
+          <section id="welcome" class="welcome-banner">
+            <h1 class="main-title">Welcome to CyberCorp Global!</h1>
+            <p class="content-para">
+              Greetings visitor! You have arrived at the official home page of <strong>CyberCorp Global Solutions</strong>. We specialize in cross-platform corporate solutions, intranet multimedia integration, and high-bandwidth cyberspace deployment.
+            </p>
+          </section>
+
+          <!-- About Us Section -->
+          <section id="about">
+            <h2 class="section-title">About Our Enterprise</h2>
+            <p class="content-para">
+              Founded in <strong>October 1999</strong>, CyberCorp has been at the forefront of the digital revolution. We empower small-to-medium businesses with next-generation HTML architecture, client-side scripts, and interactive Flash-ready paradigms.
+            </p>
+
+            <h2 class="section-title">Core Competencies & Services</h2>
+            <table class="specs-table">
+              <thead>
+                <tr>
+                  <th>Paradigm</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Dial-Up Acceleration</strong></td>
+                  <td>56k V.90 modem data compression protocols.</td>
+                  <td><span style="color: #008000; font-weight: bold;">&#10004; Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Multimedia CD-ROMs</strong></td>
+                  <td>Interactive Macromedia Director corporate presentations.</td>
+                  <td><span style="color: #008000; font-weight: bold;">&#10004; Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Y2K Readiness Audits</strong></td>
+                  <td>Complete mainframe date roll-over certification.</td>
+                  <td><span style="color: #0000cc; font-weight: bold;">Certified</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 8px;">
+              <button class="action-btn" type="button">Download Brochure (ZIP, 1.44MB)</button>
+            </p>
+
+            <!-- Retro Web Badges -->
+            <h2 class="section-title">Certifications & Compatibility</h2>
+            <div class="badge-row">
+              <!-- Netscape Badge -->
+              <div class="retro-badge badge-netscape">
+                <div class="badge-left">Netscape</div>
+                <div class="badge-right">NOW!</div>
+              </div>
+
+              <!-- Internet Explorer 6 Badge -->
+              <div class="retro-badge badge-ie">
+                <div class="badge-left">MSIE 6.0</div>
+                <div class="badge-right">Ready</div>
+              </div>
+
+              <!-- HTML 4.01 Valid Badge -->
+              <div class="retro-badge badge-valid">
+                <div class="badge-left">W3C</div>
+                <div class="badge-right">HTML 4.01</div>
+              </div>
+            </div>
+          </section>
+
+        </main>
+      </div>
+
+      <footer>
+        <div class="footer-links">
+          <a href="#welcome">Home</a> | 
+          <a href="#about">About</a> | 
+          <a href="#privacy">Privacy Statement</a> | 
+          <a href="#disclaimer">Y2K Disclaimer</a> | 
+          <a href="#top">Back to Top</a>
+        </div>
+        <p>&copy; 1999-2001 CyberCorp Global Enterprises Inc. All Rights Reserved.</p>
+        <p style="margin-top: 4px; color: #666;">Optimized for Netscape Navigator 4.7 & Internet Explorer 5.5+</p>
+      </footer>
+
+    </div>
+  </body>
+</html>
