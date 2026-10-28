@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Library Management System</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f8;color:#222}header{background:#203864;color:white;padding:20px;text-align:center}
+main{max-width:1000px;margin:24px auto;padding:0 16px}.panel{background:white;padding:18px;margin:14px 0;border-radius:8px;box-shadow:0 2px 8px #0001}
+input,select,button{padding:10px;margin:5px 3px;border:1px solid #bbb;border-radius:4px}button{background:#203864;color:white;cursor:pointer;border:0}button:hover{background:#31518a}
+table{width:100%;border-collapse:collapse;margin-top:12px}th,td{border:1px solid #ddd;padding:9px;text-align:left}th{background:#e9eef7}.muted{color:#666;font-size:.9rem}
+</style></head>
+<body>
+<header><h1>Library Management System</h1><p>Search books • Borrow and return • Admin inventory</p></header>
+<main>
+<section class="panel"><h2>Student Login / Register</h2>
+<input id="student" placeholder="Student name"><button onclick="login()">Login / Register</button><span id="welcome" class="muted"></span></section>
+<section class="panel"><h2>Search Books</h2><input id="search" placeholder="Search title or author" oninput="renderBooks()"><button onclick="renderBooks()">Search</button><div id="books"></div></section>
+<section class="panel"><h2>Librarian Admin</h2>
+<input id="title" placeholder="Book title"><input id="author" placeholder="Author"><input id="copies" type="number" min="1" value="1" placeholder="Copies">
+<button onclick="addBook()">Add Book</button>
+<p class="muted">Demo admin tools: add books, issue books, and mark returns. Data stays in this browser.</p>
+<div id="adminBooks"></div></section>
+<section class="panel"><h2>My Borrow History</h2><div id="history"></div><h3>Study Material</h3>
+<select id="year"><option>Year 1</option><option>Year 2</option><option>Year 3</option><option>Year 4</option></select>
+<select id="semester"><option>Semester 1</option><option>Semester 2</option></select>
+<button onclick="showMaterial()">View Material</button><p id="material" class="muted"></p></section>
+</main>
+<script>
+let books=JSON.parse(localStorage.getItem('libBooks')||'null')||[
+{id:1,title:'Introduction to Algorithms',author:'Cormen et al.',copies:3},
+{id:2,title:'Clean Code',author:'Robert C. Martin',copies:2},
+{id:3,title:'The Great Gatsby',author:'F. Scott Fitzgerald',copies:4}];
+let history=JSON.parse(localStorage.getItem('libHistory')||'[]'), user=localStorage.getItem('libUser')||'';
+function save(){localStorage.setItem('libBooks',JSON.stringify(books));localStorage.setItem('libHistory',JSON.stringify(history))}
+function login(){user=document.getElementById('student').value.trim();if(!user)return alert('Enter your name');localStorage.setItem('libUser',user);document.getElementById('welcome').textContent=' Signed in as '+user;renderBooks();renderHistory()}
+function renderBooks(){let q=(document.getElementById('search').value||'').toLowerCase();let found=books.filter(b=>(b.title+' '+b.author).toLowerCase().includes(q));
+document.getElementById('books').innerHTML=found.length?'<table><tr><th>Title</th><th>Author</th><th>Available</th><th>Action</th></tr>'+found.map(b=>`<tr><td>${b.title}</td><td>${b.author}</td><td>${b.copies}</td><td><button onclick="borrow(${b.id})" ${b.copies<1?'disabled':''}>Borrow</button></td></tr>`).join('')+'</table>':'No books found.';
+document.getElementById('adminBooks').innerHTML='<table><tr><th>Title</th><th>Author</th><th>Copies</th><th>Actions</th></tr>'+books.map(b=>`<tr><td>${b.title}</td><td>${b.author}</td><td>${b.copies}</td><td><button onclick="changeCopies(${b.id},1)">+ Copy</button><button onclick="changeCopies(${b.id},-1)">- Copy</button><button onclick="deleteBook(${b.id})">Delete</button></td></tr>`).join('')+'</table>'}
+function addBook(){let title=document.getElementById('title').value.trim(),author=document.getElementById('author').value.trim(),copies=Number(document.getElementById('copies').value);if(!title||!author||copies<1)return alert('Enter a title, author and at least one copy.');books.push({id:Date.now(),title,author,copies});save();renderBooks();document.getElementById('title').value='';document.getElementById('author').value=''}
+function borrow(id){if(!user)return alert('Please login first.');let b=books.find(x=>x.id===id);if(!b||b.copies<1)return alert('No copies available.');b.copies--;history.push({id:Date.now(),user,title:b.title,issue:new Date().toLocaleDateString(),due:new Date(Date.now()+14*86400000).toLocaleDateString(),returned:false});save();renderBooks();renderHistory()}
+function returnBook(id){let h=history.find(x=>x.id===id);if(h&&!h.returned){h.returned=true;let b=books.find(x=>x.title===h.title);if(b)b.copies++;save();renderBooks();renderHistory()}}
+function renderHistory(){let mine=history.filter(h=>h.user===user);document.getElementById('history').innerHTML=mine.length?'<table><tr><th>Book</th><th>Issue date</th><th>Due date</th><th>Status</th><th></th></tr>'+mine.map(h=>`<tr><td>${h.title}</td><td>${h.issue}</td><td>${h.due}</td><td>${h.returned?'Returned':'Borrowed'}</td><td>${h.returned?'':`<button onclick="returnBook(${h.id})">Return</button>`}</td></tr>`).join('')+'</table>':'No borrow history yet.'}
+function changeCopies(id,n){let b=books.find(x=>x.id===id);if(b)b.copies=Math.max(0,b.copies+n);save();renderBooks()}
+function deleteBook(id){if(confirm('Delete this book?')){books=books.filter(b=>b.id!==id);save();renderBooks()}}
+function showMaterial(){document.getElementById('material').textContent=`Sample study materials for ${document.getElementById('year').value}, ${document.getElementById('semester').value}: lecture notes and syllabus (demo).`}
+if(user){document.getElementById('student').value=user;document.getElementById('welcome').textContent=' Signed in as '+user}renderBooks();renderHistory();
+</script></body></html>
